@@ -1,0 +1,9 @@
+export default function handler(req, res) {
+  const agencies = [
+    { id: 1, name: 'Agency Alpha', website: 'https://agencyalpha.com' },
+    { id: 2, name: 'Beta Marketing', website: 'https://betamarketing.com' },
+    { id: 3, name: 'Gamma Ads', website: 'https://gammaads.com' },
+  ];
+
+  res.status(200).json(agencies);
+}
