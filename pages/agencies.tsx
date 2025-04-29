@@ -39,6 +39,11 @@ export default function AgencyIndex() {
     .filter((agency) => agency.name.toLowerCase().includes(search.toLowerCase()))
     .sort((a, b) => (sort === 'score' ? b.sharpenScore - a.sharpenScore : a.name.localeCompare(b.name)));
 
+  const topAgencies = [...allAgencies]
+    .filter((a) => clicks[a.slug])
+    .sort((a, b) => (clicks[b.slug] || 0) - (clicks[a.slug] || 0))
+    .slice(0, 5);
+
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Agency Index</h1>
@@ -56,6 +61,19 @@ export default function AgencyIndex() {
           <option value="name">Sort by Name</option>
         </select>
       </div>
+
+      {topAgencies.length > 0 && (
+        <div>
+          <h2 style={{ fontSize: '1.5rem', marginTop: '2rem' }}>🏆 Top Agencies</h2>
+          <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
+            {topAgencies.map((agency) => (
+              <li key={agency.slug} style={{ marginBottom: '0.5rem' }}>
+                {agency.name} ({clicks[agency.slug]} clicks)
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {filtered.map((agency) => (
