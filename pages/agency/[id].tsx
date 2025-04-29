@@ -6,7 +6,6 @@ const allAgencies = [
   { id: 3, name: 'Gamma Growth', sharpenScore: 85, mainKPI: 'Conversion Rate 12%', specialization: 'SaaS Growth', country: 'Global' },
   { id: 4, name: 'Delta Digital', sharpenScore: 81, mainKPI: 'Engagement Rate 7.1%', specialization: 'Content Marketing', country: 'Global' },
   { id: 5, name: 'Epsilon Creatives', sharpenScore: 78, mainKPI: 'Lead Cost $12', specialization: 'CRO & Creatives', country: 'Global' },
-  // Finnish agencies
   { id: 6, name: 'Nordic Boost', sharpenScore: 83, mainKPI: 'ROAS 4.8x', specialization: 'E-commerce', country: 'Finland' },
   { id: 7, name: 'Suomi Media', sharpenScore: 80, mainKPI: 'CPL €9', specialization: 'Paid Ads', country: 'Finland' },
   { id: 8, name: 'Helsinki Digital', sharpenScore: 77, mainKPI: 'CTR 7.2%', specialization: 'Content Marketing', country: 'Finland' },
@@ -34,6 +33,7 @@ export default function AgencyProfile() {
       <div style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
         Sharpen Score: <strong>{agency.sharpenScore}</strong>
       </div>
+
       <div style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
         Main KPI: {agency.mainKPI}
       </div>
@@ -54,16 +54,6 @@ export default function AgencyProfile() {
       }}>
         "{agency.name} helps businesses grow through {agency.specialization.toLowerCase()} excellence. Learn how we achieve exceptional results."
       </div>
-    </div>
-  );
-}
-
-  return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '2rem', textAlign: 'center' }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{agency.name}</h1>
-      <p style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Sharpen Score: <strong>{agency.sharpenScore}</strong></p>
-      <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>Main KPI: {agency.mainKPI}</p>
-      <p style={{ maxWidth: '600px', fontSize: '1rem', color: '#555' }}>{agency.description}</p>
     </div>
   );
 }
