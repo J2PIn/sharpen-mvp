@@ -13,106 +13,16 @@ type Agency = {
 };
 
 const allAgencies: Agency[] = [
-  {
-    id: 1,
-    name: 'Alpha Marketing',
-    slug: 'alpha-marketing',
-    logo: 'https://logo.clearbit.com/alphamarketing.com',
-    sharpenScore: 92,
-    mainKPI: 'ROAS 5.2x',
-    specialization: 'E-commerce',
-    country: 'Global',
-  },
-  {
-    id: 2,
-    name: 'Beta Ads',
-    slug: 'beta-ads',
-    logo: 'https://logo.clearbit.com/betaads.com',
-    sharpenScore: 88,
-    mainKPI: 'CTR 8.5%',
-    specialization: 'Paid Ads',
-    country: 'Global',
-  },
-  {
-    id: 3,
-    name: 'Gamma Growth',
-    slug: 'gamma-growth',
-    logo: 'https://logo.clearbit.com/gammagrowth.com',
-    sharpenScore: 85,
-    mainKPI: 'Conversion Rate 12%',
-    specialization: 'SaaS Growth',
-    country: 'Global',
-  },
-  {
-    id: 4,
-    name: 'Delta Digital',
-    slug: 'delta-digital',
-    logo: 'https://logo.clearbit.com/deltadigital.com',
-    sharpenScore: 81,
-    mainKPI: 'Engagement Rate 7.1%',
-    specialization: 'Content Marketing',
-    country: 'Global',
-  },
-  {
-    id: 5,
-    name: 'Epsilon Creatives',
-    slug: 'epsilon-creatives',
-    logo: 'https://logo.clearbit.com/epsiloncreatives.com',
-    sharpenScore: 78,
-    mainKPI: 'Lead Cost $12',
-    specialization: 'CRO & Creatives',
-    country: 'Global',
-  },
-  {
-    id: 6,
-    name: 'Nordic Boost',
-    slug: 'nordic-boost',
-    logo: 'https://logo.clearbit.com/nordicboost.fi',
-    sharpenScore: 83,
-    mainKPI: 'ROAS 4.8x',
-    specialization: 'E-commerce',
-    country: 'Finland',
-  },
-  {
-    id: 7,
-    name: 'Suomi Media',
-    slug: 'suomi-media',
-    logo: 'https://logo.clearbit.com/suomimedia.fi',
-    sharpenScore: 80,
-    mainKPI: 'CPL €9',
-    specialization: 'Paid Ads',
-    country: 'Finland',
-  },
-  {
-    id: 8,
-    name: 'Helsinki Digital',
-    slug: 'helsinki-digital',
-    logo: 'https://logo.clearbit.com/helsinkidigital.fi',
-    sharpenScore: 77,
-    mainKPI: 'CTR 7.2%',
-    specialization: 'Content Marketing',
-    country: 'Finland',
-  },
-  {
-    id: 9,
-    name: 'Arctic Growth',
-    slug: 'arctic-growth',
-    logo: 'https://logo.clearbit.com/arcticgrowth.fi',
-    sharpenScore: 74,
-    mainKPI: 'Conversion Rate 10%',
-    specialization: 'SaaS Growth',
-    country: 'Finland',
-  },
-  {
-    id: 10,
-    name: 'Lakeside Agency',
-    slug: 'lakeside-agency',
-    logo: 'https://logo.clearbit.com/lakesideagency.fi',
-    sharpenScore: 71,
-    mainKPI: 'Lead Cost €11',
-    specialization: 'CRO & Creatives',
-    country: 'Finland',
-  },
+  { id: 1, name: 'Alpha Marketing', slug: 'alpha-marketing', logo: 'https://logo.clearbit.com/alphamarketing.com', sharpenScore: 92, mainKPI: 'ROAS 5.2x', specialization: 'E-commerce', country: 'Global' },
+  { id: 2, name: 'Beta Ads', slug: 'beta-ads', logo: 'https://logo.clearbit.com/betaads.com', sharpenScore: 88, mainKPI: 'CTR 8.5%', specialization: 'Paid Ads', country: 'Global' },
+  { id: 3, name: 'Gamma Growth', slug: 'gamma-growth', logo: 'https://logo.clearbit.com/gammagrowth.com', sharpenScore: 85, mainKPI: 'Conversion Rate 12%', specialization: 'SaaS Growth', country: 'Global' },
+  { id: 4, name: 'Delta Digital', slug: 'delta-digital', logo: 'https://logo.clearbit.com/deltadigital.com', sharpenScore: 81, mainKPI: 'Engagement Rate 7.1%', specialization: 'Content Marketing', country: 'Global' },
+  { id: 5, name: 'Epsilon Creatives', slug: 'epsilon-creatives', logo: 'https://logo.clearbit.com/epsiloncreatives.com', sharpenScore: 78, mainKPI: 'Lead Cost $12', specialization: 'CRO & Creatives', country: 'Global' },
+  { id: 6, name: 'Nordic Boost', slug: 'nordic-boost', logo: 'https://logo.clearbit.com/nordicboost.fi', sharpenScore: 83, mainKPI: 'ROAS 4.8x', specialization: 'E-commerce', country: 'Finland' },
+  { id: 7, name: 'Suomi Media', slug: 'suomi-media', logo: 'https://logo.clearbit.com/suomimedia.fi', sharpenScore: 80, mainKPI: 'CPL €9', specialization: 'Paid Ads', country: 'Finland' },
+  { id: 8, name: 'Helsinki Digital', slug: 'helsinki-digital', logo: 'https://logo.clearbit.com/helsinkidigital.fi', sharpenScore: 77, mainKPI: 'CTR 7.2%', specialization: 'Content Marketing', country: 'Finland' },
+  { id: 9, name: 'Arctic Growth', slug: 'arctic-growth', logo: 'https://logo.clearbit.com/arcticgrowth.fi', sharpenScore: 74, mainKPI: 'Conversion Rate 10%', specialization: 'SaaS Growth', country: 'Finland' },
+  { id: 10, name: 'Lakeside Agency', slug: 'lakeside-agency', logo: 'https://logo.clearbit.com/lakesideagency.fi', sharpenScore: 71, mainKPI: 'Lead Cost €11', specialization: 'CRO & Creatives', country: 'Finland' },
 ];
 
 export default function AgencyIndex() {
@@ -149,7 +59,16 @@ export default function AgencyIndex() {
             )}
             <div>
               <Link href={`/agency/${agency.slug}`}>
-                <a style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0070f3', textDecoration: 'none' }}>{agency.name}</a>
+                <a
+                  style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0070f3', textDecoration: 'none' }}
+                  onClick={() => {
+                    const clicks = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
+                    clicks[agency.slug] = (clicks[agency.slug] || 0) + 1;
+                    localStorage.setItem('agencyClicks', JSON.stringify(clicks));
+                  }}
+                >
+                  {agency.name}
+                </a>
               </Link>
               <div>Sharpen Score: <strong>{agency.sharpenScore}</strong></div>
               <div>Main KPI: {agency.mainKPI}</div>
