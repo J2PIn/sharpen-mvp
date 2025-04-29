@@ -1,110 +1,59 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 
-type Agency = {
-  id: number;
-  name: string;
-  slug: string;
-  logo?: string;
-  sharpenScore: number;
-  mainKPI: string;
-  specialization: string;
-  country: string;
-};
-
-const allAgencies: Agency[] = [
-  { id: 1, name: 'Alpha Marketing', slug: 'alpha-marketing', logo: 'https://logo.clearbit.com/alphamarketing.com', sharpenScore: 92, mainKPI: 'ROAS 5.2x', specialization: 'E-commerce', country: 'Global' },
-  { id: 2, name: 'Beta Ads', slug: 'beta-ads', logo: 'https://logo.clearbit.com/betaads.com', sharpenScore: 88, mainKPI: 'CTR 8.5%', specialization: 'Paid Ads', country: 'Global' },
-  { id: 3, name: 'Gamma Growth', slug: 'gamma-growth', logo: 'https://logo.clearbit.com/gammagrowth.com', sharpenScore: 85, mainKPI: 'Conversion Rate 12%', specialization: 'SaaS Growth', country: 'Global' },
-  { id: 4, name: 'Delta Digital', slug: 'delta-digital', logo: 'https://logo.clearbit.com/deltadigital.com', sharpenScore: 81, mainKPI: 'Engagement Rate 7.1%', specialization: 'Content Marketing', country: 'Global' },
-  { id: 5, name: 'Epsilon Creatives', slug: 'epsilon-creatives', logo: 'https://logo.clearbit.com/epsiloncreatives.com', sharpenScore: 78, mainKPI: 'Lead Cost $12', specialization: 'CRO & Creatives', country: 'Global' },
-  { id: 6, name: 'Nordic Boost', slug: 'nordic-boost', logo: 'https://logo.clearbit.com/nordicboost.fi', sharpenScore: 83, mainKPI: 'ROAS 4.8x', specialization: 'E-commerce', country: 'Finland' },
-  { id: 7, name: 'Suomi Media', slug: 'suomi-media', logo: 'https://logo.clearbit.com/suomimedia.fi', sharpenScore: 80, mainKPI: 'CPL €9', specialization: 'Paid Ads', country: 'Finland' },
-  { id: 8, name: 'Helsinki Digital', slug: 'helsinki-digital', logo: 'https://logo.clearbit.com/helsinkidigital.fi', sharpenScore: 77, mainKPI: 'CTR 7.2%', specialization: 'Content Marketing', country: 'Finland' },
-  { id: 9, name: 'Arctic Growth', slug: 'arctic-growth', logo: 'https://logo.clearbit.com/arcticgrowth.fi', sharpenScore: 74, mainKPI: 'Conversion Rate 10%', specialization: 'SaaS Growth', country: 'Finland' },
-  { id: 10, name: 'Lakeside Agency', slug: 'lakeside-agency', logo: 'https://logo.clearbit.com/lakesideagency.fi', sharpenScore: 71, mainKPI: 'Lead Cost €11', specialization: 'CRO & Creatives', country: 'Finland' },
+const agencies = [
+  { id: 1, name: 'Alpha Marketing', sharpenScore: 92, mainKPI: 'ROAS 5.2x', slug: 'alpha-marketing' },
+  { id: 2, name: 'Beta Ads', sharpenScore: 88, mainKPI: 'CTR 8.5%', slug: 'beta-ads' },
+  { id: 3, name: 'Gamma Growth', sharpenScore: 85, mainKPI: 'Conversion Rate 12%', slug: 'gamma-growth' },
+  { id: 4, name: 'Delta Digital', sharpenScore: 81, mainKPI: 'Engagement Rate 7.1%', slug: 'delta-digital' },
+  { id: 5, name: 'Epsilon Creatives', sharpenScore: 78, mainKPI: 'Lead Cost $12', slug: 'epsilon-creatives' },
 ];
 
-export default function AgencyIndex() {
-  const [sort, setSort] = useState<'score' | 'name'>('score');
-  const [search, setSearch] = useState('');
-  const [clicks, setClicks] = useState<Record<string, number>>({});
+export default function Agencies() {
+  const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
-    setClicks(stored);
-  }, []);
-
-  const filtered = allAgencies
-    .filter((agency) => agency.name.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => (sort === 'score' ? b.sharpenScore - a.sharpenScore : a.name.localeCompare(b.name)));
-
-  const topAgencies = [...allAgencies]
-    .filter((a) => clicks[a.slug])
-    .sort((a, b) => (clicks[b.slug] || 0) - (clicks[a.slug] || 0))
-    .slice(0, 5);
+  const filteredAgencies = useMemo(() => {
+    return agencies.filter(a => a.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  }, [searchTerm]);
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Agency Index</h1>
+    <div>
+      <h1 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '2rem' }}>Top Agencies</h1>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <input
           type="text"
-          placeholder="Search agency..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid #ccc' }}
+          placeholder="Search agencies..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid #ccc', width: '300px' }}
         />
-        <select value={sort} onChange={(e) => setSort(e.target.value as 'score' | 'name')} style={{ padding: '0.5rem' }}>
-          <option value="score">Sort by Sharpen Score</option>
-          <option value="name">Sort by Name</option>
-        </select>
       </div>
 
-      {topAgencies.length > 0 && (
-        <div>
-          <h2 style={{ fontSize: '1.5rem', marginTop: '2rem' }}>🏆 Top Agencies</h2>
-          <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
-            {topAgencies.map((agency) => (
-              <li key={agency.slug} style={{ marginBottom: '0.5rem' }}>
-                {agency.name} ({clicks[agency.slug]} clicks)
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {filtered.map((agency) => (
-          <li key={agency.id} style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', padding: '1rem', border: '1px solid #ddd', borderRadius: '8px' }}>
-            {agency.logo && (
-              <img src={agency.logo} alt={`${agency.name} logo`} style={{ width: '48px', height: '48px', objectFit: 'contain', borderRadius: '6px' }} />
-            )}
-            <div>
-              <Link href={`/agency/${agency.slug}`}>
-                <a
-                  style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0070f3', textDecoration: 'none' }}
-                  onClick={() => {
-                    if (!sessionStorage.getItem(agency.slug)) {
-                      const storedClicks = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
-                      storedClicks[agency.slug] = (storedClicks[agency.slug] || 0) + 1;
-                      localStorage.setItem('agencyClicks', JSON.stringify(storedClicks));
-                      sessionStorage.setItem(agency.slug, 'clicked');
-                      setClicks(storedClicks);
-                    }
-                  }}
-                >
-                  {agency.name} {clicks[agency.slug] ? `(${clicks[agency.slug]} clicks)` : ''}
-                </a>
-              </Link>
-              <div>Sharpen Score: <strong>{agency.sharpenScore}</strong></div>
-              <div>Main KPI: {agency.mainKPI}</div>
-              <div>{agency.specialization} · {agency.country}</div>
-            </div>
-          </li>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+        {filteredAgencies.map((agency) => (
+          <Link key={agency.id} href={`/agency/${agency.slug}`} passHref>
+            <a style={{
+              padding: '1.5rem',
+              border: '1px solid #e0e0e0',
+              borderRadius: '12px',
+              backgroundColor: '#fff',
+              textDecoration: 'none',
+              color: '#111',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+              display: 'block'
+            }}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)'; }}
+            >
+              <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{agency.name}</h2>
+              <p style={{ margin: '0.5rem 0' }}><strong>Sharpen Score:</strong> {agency.sharpenScore}</p>
+              <p style={{ margin: 0 }}><strong>Main KPI:</strong> {agency.mainKPI}</p>
+            </a>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
