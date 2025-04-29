@@ -1,125 +1,74 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-// --- International agencies ---
-const realAgencies = [
-  { id: 1, name: "WebFX", sharpenScore: 98, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/webfx" },
-  { id: 2, name: "Disruptive Advertising", sharpenScore: 96, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/disruptive-advertising" },
-  { id: 3, name: "Ignite Visibility", sharpenScore: 96, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/ignite-visibility" },
-  { id: 4, name: "Ruckus", sharpenScore: 100, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/ruckus" },
-  { id: 5, name: "Power Digital", sharpenScore: 96, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/power-digital" },
-  { id: 6, name: "Accelerated Digital Media", sharpenScore: 94, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/accelerated-digital-media" },
-  { id: 7, name: "SmartSites", sharpenScore: 98, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/smartsites" },
-  { id: 8, name: "Funnel Boost Media", sharpenScore: 98, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/funnel-boost-media" },
-  { id: 9, name: "SeedX Inc.", sharpenScore: 100, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/seedx" },
-  { id: 10, name: "Socium Media", sharpenScore: 98, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/socium-media" },
-  { id: 11, name: "JOS", sharpenScore: 98, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/jos" },
-  { id: 12, name: "Search Berg", sharpenScore: 92, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/search-berg" },
-  { id: 13, name: "HawkSEM", sharpenScore: 98, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/hawksem" },
-  { id: 14, name: "Big Red Jelly", sharpenScore: 96, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/big-red-jelly" },
-  { id: 15, name: "Promodo", sharpenScore: 96, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/promodo" },
-  { id: 16, name: "Thrive Internet Marketing Agency", sharpenScore: 92, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/thrive-internet-marketing-agency" },
-  { id: 17, name: "Harvest Growth", sharpenScore: 100, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/harvest-growth" },
-  { id: 18, name: "Desun Technology Pvt Ltd", sharpenScore: 100, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/desun-technology" },
-  { id: 19, name: "EvenDigit", sharpenScore: 98, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/evendigit" },
-  { id: 20, name: "Elit-Web", sharpenScore: 100, mainKPI: "ROAS 5.0x", website: "https://clutch.co/profile/elit-web" },
-];
-
-// --- Finnish agencies ---
-const finnishAgencies = [
-  { id: 21, name: "Hasan & Partners", sharpenScore: 90, mainKPI: "ROAS 4.5x", website: "https://hasanpartners.fi" },
-  { id: 22, name: "TBWA\\Helsinki", sharpenScore: 92, mainKPI: "CTR 8.2%", website: "https://tbwa.fi" },
-  { id: 23, name: "Bob the Robot", sharpenScore: 89, mainKPI: "Lead Cost €15", website: "https://bobtherobot.fi" },
-  { id: 24, name: "Dagmar", sharpenScore: 91, mainKPI: "ROAS 5.0x", website: "https://dagmar.fi" },
-  { id: 25, name: "SEK", sharpenScore: 87, mainKPI: "Conversion Rate 11%", website: "https://sek.fi" },
-  { id: 26, name: "Nitro", sharpenScore: 85, mainKPI: "CTR 7.8%", website: "https://nitro.fi" },
-  { id: 27, name: "Meltwater Finland", sharpenScore: 90, mainKPI: "Engagement Rate 6.5%", website: "https://www.meltwater.com/fi" },
-  { id: 28, name: "Kurio", sharpenScore: 88, mainKPI: "Social Reach 500k", website: "https://kurio.fi" },
-  { id: 29, name: "Tulos Helsinki", sharpenScore: 93, mainKPI: "ROAS 6.0x", website: "https://tulos.fi" },
-  { id: 30, name: "Evermade", sharpenScore: 89, mainKPI: "Conversion Rate 12%", website: "https://evermade.fi" },
+const allAgencies = [
+  { id: 1, name: 'Alpha Marketing', sharpenScore: 92, mainKPI: 'ROAS 5.2x' },
+  { id: 2, name: 'Beta Ads', sharpenScore: 88, mainKPI: 'CTR 8.5%' },
+  { id: 3, name: 'Gamma Growth', sharpenScore: 85, mainKPI: 'Conversion Rate 12%' },
+  { id: 4, name: 'Delta Digital', sharpenScore: 81, mainKPI: 'Engagement Rate 7.1%' },
+  { id: 5, name: 'Epsilon Creatives', sharpenScore: 78, mainKPI: 'Lead Cost $12' },
+  // Finnish agencies
+  { id: 6, name: 'Nordic Boost', sharpenScore: 83, mainKPI: 'ROAS 4.8x' },
+  { id: 7, name: 'Suomi Media', sharpenScore: 80, mainKPI: 'CPL €9' },
+  { id: 8, name: 'Helsinki Digital', sharpenScore: 77, mainKPI: 'CTR 7.2%' },
+  { id: 9, name: 'Arctic Growth', sharpenScore: 74, mainKPI: 'Conversion Rate 10%' },
+  { id: 10, name: 'Lakeside Agency', sharpenScore: 71, mainKPI: 'Lead Cost €11' },
 ];
 
 export default function AgencyIndex() {
-  const [sortOption, setSortOption] = useState('score-desc');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const combinedAgencies = realAgencies.concat(finnishAgencies);
-
-  const sortedAgencies = [...combinedAgencies].sort((a, b) => {
-    if (sortOption === 'score-desc') {
-      return b.sharpenScore - a.sharpenScore;
-    } else if (sortOption === 'score-asc') {
-      return a.sharpenScore - b.sharpenScore;
-    } else if (sortOption === 'name-asc') {
-      return a.name.localeCompare(b.name);
-    } else if (sortOption === 'name-desc') {
-      return b.name.localeCompare(a.name);
-    }
-    return 0;
-  });
+  const filteredAgencies = allAgencies.filter((agency) =>
+    agency.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '1rem' }}>Sharpen Agency Index</h1>
+      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Agency Index</h1>
 
-      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-        <label htmlFor="sort" style={{ fontSize: '1.1rem', marginRight: '1rem' }}>Sort by:</label>
-        <select
-          id="sort"
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          style={{ padding: '0.5rem 1rem', fontSize: '1rem', borderRadius: '8px', border: '1px solid #ccc' }}
-        >
-          <option value="score-desc">Sharpen Score (Highest first)</option>
-          <option value="score-asc">Sharpen Score (Lowest first)</option>
-          <option value="name-asc">Alphabetical (A–Z)</option>
-          <option value="name-desc">Alphabetical (Z–A)</option>
-        </select>
-      </div>
+      <input
+        type="text"
+        placeholder="Search agencies..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{
+          width: '100%',
+          maxWidth: '400px',
+          padding: '0.75rem',
+          marginBottom: '2rem',
+          borderRadius: '8px',
+          border: '1px solid #ccc',
+          fontSize: '1rem'
+        }}
+      />
 
-      <ul style={{
-        listStyle: 'none',
-        padding: 0,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '1.5rem'
-      }}>
-        {sortedAgencies.map((agency) => (
-          <li key={agency.id} style={{
-            padding: '1.5rem',
-            border: '1px solid #eee',
-            borderRadius: '12px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.05)',
-            transition: 'all 0.2s ease-in-out'
-          }}>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        {filteredAgencies.map((agency) => (
+          <li
+            key={agency.id}
+            style={{
+              marginBottom: '1rem',
+              padding: '1rem',
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+            }}
+          >
             <Link href={`/agency/${agency.id}`}>
-              <a style={{
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
-                color: '#0070f3',
-                textDecoration: 'none',
-                display: 'block',
-                marginBottom: '0.5rem'
-              }}>
+              <a style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0070f3', textDecoration: 'none' }}>
                 {agency.name}
               </a>
             </Link>
-            <div style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>
+            <div style={{ marginTop: '0.25rem' }}>
               Sharpen Score: <strong>{agency.sharpenScore}</strong>
             </div>
-            <div style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
-              Main KPI: {agency.mainKPI}
-            </div>
-            <a href={agency.website} target="_blank" rel="noopener noreferrer" style={{
-              fontSize: '0.9rem',
-              color: '#555',
-              textDecoration: 'underline'
-            }}>
-              Visit Website
-            </a>
+            <div>Main KPI: {agency.mainKPI}</div>
           </li>
         ))}
       </ul>
+
+      {filteredAgencies.length === 0 && (
+        <p style={{ marginTop: '2rem', color: '#999' }}>No agencies found.</p>
+      )}
     </div>
   );
 }
-
