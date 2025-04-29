@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from 'next/link';
 
 // --- International agencies ---
@@ -39,9 +40,42 @@ const finnishAgencies = [
 ];
 
 export default function AgencyIndex() {
+  const [sortOption, setSortOption] = useState('score-desc');
+
+  const combinedAgencies = realAgencies.concat(finnishAgencies);
+
+  const sortedAgencies = [...combinedAgencies].sort((a, b) => {
+    if (sortOption === 'score-desc') {
+      return b.sharpenScore - a.sharpenScore;
+    } else if (sortOption === 'score-asc') {
+      return a.sharpenScore - b.sharpenScore;
+    } else if (sortOption === 'name-asc') {
+      return a.name.localeCompare(b.name);
+    } else if (sortOption === 'name-desc') {
+      return b.name.localeCompare(a.name);
+    }
+    return 0;
+  });
+
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '2rem' }}>Sharpen Agency Index</h1>
+      <h1 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '1rem' }}>Sharpen Agency Index</h1>
+
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+        <label htmlFor="sort" style={{ fontSize: '1.1rem', marginRight: '1rem' }}>Sort by:</label>
+        <select
+          id="sort"
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          style={{ padding: '0.5rem 1rem', fontSize: '1rem', borderRadius: '8px', border: '1px solid #ccc' }}
+        >
+          <option value="score-desc">Sharpen Score (Highest first)</option>
+          <option value="score-asc">Sharpen Score (Lowest first)</option>
+          <option value="name-asc">Alphabetical (A–Z)</option>
+          <option value="name-desc">Alphabetical (Z–A)</option>
+        </select>
+      </div>
+
       <ul style={{
         listStyle: 'none',
         padding: 0,
@@ -49,7 +83,7 @@ export default function AgencyIndex() {
         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
         gap: '1.5rem'
       }}>
-        {realAgencies.concat(finnishAgencies).map((agency) => (
+        {sortedAgencies.map((agency) => (
           <li key={agency.id} style={{
             padding: '1.5rem',
             border: '1px solid #eee',
@@ -88,5 +122,4 @@ export default function AgencyIndex() {
     </div>
   );
 }
-
 
