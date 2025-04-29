@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 type Agency = {
   id: number;
@@ -28,6 +28,12 @@ const allAgencies: Agency[] = [
 export default function AgencyIndex() {
   const [sort, setSort] = useState<'score' | 'name'>('score');
   const [search, setSearch] = useState('');
+  const [clicks, setClicks] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
+    setClicks(stored);
+  }, []);
 
   const filtered = allAgencies
     .filter((agency) => agency.name.toLowerCase().includes(search.toLowerCase()))
@@ -62,12 +68,13 @@ export default function AgencyIndex() {
                 <a
                   style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0070f3', textDecoration: 'none' }}
                   onClick={() => {
-                    const clicks = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
-                    clicks[agency.slug] = (clicks[agency.slug] || 0) + 1;
-                    localStorage.setItem('agencyClicks', JSON.stringify(clicks));
+                    const storedClicks = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
+                    storedClicks[agency.slug] = (storedClicks[agency.slug] || 0) + 1;
+                    localStorage.setItem('agencyClicks', JSON.stringify(storedClicks));
+                    setClicks(storedClicks);
                   }}
                 >
-                  {agency.name}
+                  {agency.name} {clicks[agency.slug] ? `(${clicks[agency.slug]} clicks)` : ''}
                 </a>
               </Link>
               <div>Sharpen Score: <strong>{agency.sharpenScore}</strong></div>
