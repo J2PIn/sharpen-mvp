@@ -17,30 +17,72 @@ const allAgencies = [
 
 export default function AgencyIndex() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
-  const filteredAgencies = allAgencies.filter((agency) =>
-    agency.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredAgencies = allAgencies
+    .filter((agency) =>
+      agency.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) =>
+      sortOrder === 'asc'
+        ? a.sharpenScore - b.sharpenScore
+        : b.sharpenScore - a.sharpenScore
+    );
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Agency Index</h1>
 
-      <input
-        type="text"
-        placeholder="Search agencies..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        style={{
-          width: '100%',
-          maxWidth: '400px',
-          padding: '0.75rem',
-          marginBottom: '2rem',
-          borderRadius: '8px',
-          border: '1px solid #ccc',
-          fontSize: '1rem'
-        }}
-      />
+      <div style={{ marginBottom: '1.5rem' }}>
+        <input
+          type="text"
+          placeholder="Search agencies..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            width: '100%',
+            maxWidth: '400px',
+            padding: '0.75rem',
+            marginBottom: '1rem',
+            borderRadius: '8px',
+            border: '1px solid #ccc',
+            fontSize: '1rem'
+          }}
+        />
+
+        <div>
+          <button
+            onClick={() => setSortOrder('desc')}
+            style={{
+              marginRight: '1rem',
+              padding: '0.5rem 1rem',
+              backgroundColor: sortOrder === 'desc' ? '#0070f3' : '#f0f0f0',
+              color: sortOrder === 'desc' ? '#fff' : '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            Highest Score
+          </button>
+
+          <button
+            onClick={() => setSortOrder('asc')}
+            style={{
+              padding: '0.5rem 1rem',
+              backgroundColor: sortOrder === 'asc' ? '#0070f3' : '#f0f0f0',
+              color: sortOrder === 'asc' ? '#fff' : '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            Lowest Score
+          </button>
+        </div>
+      </div>
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {filteredAgencies.map((agency) => (
