@@ -86,10 +86,13 @@ export default function AgencyIndex() {
                 <a
                   style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0070f3', textDecoration: 'none' }}
                   onClick={() => {
-                    const storedClicks = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
-                    storedClicks[agency.slug] = (storedClicks[agency.slug] || 0) + 1;
-                    localStorage.setItem('agencyClicks', JSON.stringify(storedClicks));
-                    setClicks(storedClicks);
+                    if (!sessionStorage.getItem(agency.slug)) {
+                      const storedClicks = JSON.parse(localStorage.getItem('agencyClicks') || '{}');
+                      storedClicks[agency.slug] = (storedClicks[agency.slug] || 0) + 1;
+                      localStorage.setItem('agencyClicks', JSON.stringify(storedClicks));
+                      sessionStorage.setItem(agency.slug, 'clicked');
+                      setClicks(storedClicks);
+                    }
                   }}
                 >
                   {agency.name} {clicks[agency.slug] ? `(${clicks[agency.slug]} clicks)` : ''}
