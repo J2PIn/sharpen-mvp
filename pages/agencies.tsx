@@ -41,22 +41,52 @@ const finnishAgencies = [
 export default function AgencyIndex() {
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Agency Index</h1>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <h1 style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '2rem' }}>Sharpen Agency Index</h1>
+      <ul style={{
+        listStyle: 'none',
+        padding: 0,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gap: '1.5rem'
+      }}>
         {realAgencies.concat(finnishAgencies).map((agency) => (
-          <li key={agency.id} style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #ddd', borderRadius: '8px' }}>
+          <li key={agency.id} style={{
+            padding: '1.5rem',
+            border: '1px solid #eee',
+            borderRadius: '12px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.05)',
+            transition: 'all 0.2s ease-in-out'
+          }}>
             <Link href={`/agency/${agency.id}`}>
-              <a style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0070f3', textDecoration: 'none' }}>
+              <a style={{
+                fontSize: '1.5rem',
+                fontWeight: 'bold',
+                color: '#0070f3',
+                textDecoration: 'none',
+                display: 'block',
+                marginBottom: '0.5rem'
+              }}>
                 {agency.name}
               </a>
             </Link>
-            <div>Sharpen Score: {agency.sharpenScore}</div>
-            <div>Main KPI: {agency.mainKPI}</div>
-            <div><a href={agency.website} target="_blank" rel="noopener noreferrer">Visit Website</a></div>
+            <div style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>
+              Sharpen Score: <strong>{agency.sharpenScore}</strong>
+            </div>
+            <div style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
+              Main KPI: {agency.mainKPI}
+            </div>
+            <a href={agency.website} target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '0.9rem',
+              color: '#555',
+              textDecoration: 'underline'
+            }}>
+              Visit Website
+            </a>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
 
