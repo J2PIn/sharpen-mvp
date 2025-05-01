@@ -8,9 +8,15 @@ export default function AgencyIndex() {
 
   const filteredAgencies = agencies
     .map(agency => ({
-      ...agency,
-      sharpenScore: calculateSharpenScore(agency)
-    }))
+	 ...agency,
+  sharpenScore: calculateSharpenScore({
+    kpiType: agency.kpiType,
+    kpiValue: agency.kpiValue,
+    lastUpdated: agency.lastUpdated,
+    clientSize: agency.clientSize
+  })
+}))
+
     .filter(agency =>
       agency.name.toLowerCase().includes(search.toLowerCase())
     )
