@@ -1,4 +1,37 @@
 import Link from 'next/link';
+import Head from 'next/head';
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col items-center justify-center px-4">
+      <Head>
+        <title>Sharpen Index</title>
+      </Head>
+      <div className="max-w-3xl w-full bg-white shadow-xl rounded-2xl p-10 text-center border border-gray-200">
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-6">
+          See who REALLY delivers the results.
+        </h1>
+        <p className="text-lg text-gray-600 mb-10">
+          Discover the first-ever index where marketing results are public, measurable, and competitive. Find the agency that truly delivers results for your business.
+        </p>
+        <div className="flex justify-center space-x-4">
+          <Link href="/agencies">
+            <a className="px-6 py-3 bg-black text-white font-semibold rounded-xl shadow-md hover:bg-gray-900 transition">
+              See the Index
+            </a>
+          </Link>
+          <Link href="/submit">
+            <a className="px-6 py-3 bg-white text-black font-semibold border border-gray-300 rounded-xl hover:bg-gray-100 transition">
+              Submit KPIs
+            </a>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+import Link from 'next/link';
 
 export default function Home() {
   return (
