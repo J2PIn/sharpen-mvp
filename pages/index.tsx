@@ -1,36 +1,35 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col items-center justify-center px-4">
+    <>
       <Head>
         <title>Sharpen Index</title>
-        <meta name="description" content="See who REALLY delivers the results" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="See who REALLY delivers the results." />
       </Head>
 
-      <div className="text-center max-w-2xl">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900">
+      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-16 bg-gradient-to-b from-gray-50 to-white text-center">
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 mb-6">
           See who REALLY delivers the results.
         </h1>
-        <p className="text-lg md:text-xl text-gray-600 mb-8">
-          Discover the first-ever index where marketing results are public, measurable, and competitive. Find the agency that truly delivers results for your business.
+        <p className="text-lg sm:text-xl text-gray-700 max-w-2xl mb-8">
+          Discover the first-ever index where marketing results are public, measurable, and competitive.
+          Find the agency that truly delivers results for your business.
         </p>
-
-        <div className="flex justify-center gap-4">
-          <Link href="/agencies" passHref legacyBehavior>
-            <a className="bg-black text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-gray-800 transition">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link href="/agencies">
+            <a className="bg-black text-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-800 transition">
               See the Index
             </a>
           </Link>
-          <Link href="/submit" passHref legacyBehavior>
-            <a className="bg-white text-black border border-gray-300 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-gray-100 transition">
+          <Link href="/submit">
+            <a className="bg-white text-black font-semibold px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition">
               Submit KPIs
             </a>
           </Link>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
