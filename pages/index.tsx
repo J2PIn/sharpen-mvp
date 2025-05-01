@@ -2,57 +2,127 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '2rem', textAlign: 'center', backgroundColor: '#f9fafb' }}>
-
-      <div style={{ maxWidth: '800px', marginBottom: '3rem' }}>
-        <img 
-          src="https://uploads-ssl.webflow.com/64b938c646f5a8594fc1f2b9/64e0c76b1a5f8de691edc8db_dashboard-illustration.png" 
-          alt="Hero Illustration"
-          style={{ width: '100%', height: 'auto', borderRadius: '12px', marginBottom: '2rem' }}
-        />
-
-        <h1 style={{ fontSize: '2.8rem', marginBottom: '1.5rem', color: '#111', fontWeight: 'bold' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+      {/* Hero Section */}
+      <div style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#fff' }}>
+        <h1 style={{ fontSize: '2.75rem', marginBottom: '1rem' }}>
           See who REALLY delivers the results.
         </h1>
-
-        <p style={{ fontSize: '1.25rem', color: '#555', marginBottom: '2rem' }}>
-          Discover the world's first transparent marketing index. Public, competitive, and based on real performance metrics — not promises.
+        <p style={{ fontSize: '1.25rem', maxWidth: '700px', margin: '0 auto 2rem' }}>
+          Discover the first-ever index where marketing results are public, measurable, and competitive. Find the agency that truly delivers results for your business.
         </p>
-
-        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
-          <Link href="/agencies" passHref>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <Link href="/agencies">
             <a style={{
-              backgroundColor: '#0070f3', 
-              color: '#fff', 
-              padding: '0.75rem 1.5rem', 
+              backgroundColor: '#000',
+              color: '#fff',
+              padding: '0.75rem 1.5rem',
               borderRadius: '8px',
               textDecoration: 'none',
-              fontWeight: 'bold',
-              fontSize: '1rem',
-              transition: 'background-color 0.2s'
+              fontWeight: 'bold'
             }}>
               See the Index
             </a>
           </Link>
-
-          <Link href="/submit" passHref>
+          <Link href="/submit">
             <a style={{
-              backgroundColor: '#fff', 
-              color: '#0070f3', 
-              padding: '0.75rem 1.5rem', 
-              border: '2px solid #0070f3',
+              backgroundColor: '#f0f0f0',
+              color: '#000',
+              padding: '0.75rem 1.5rem',
               borderRadius: '8px',
               textDecoration: 'none',
               fontWeight: 'bold',
-              fontSize: '1rem',
-              transition: 'background-color 0.2s, color 0.2s'
+              border: '1px solid #ccc'
             }}>
-              Submit Your KPIs
+              Submit KPIs
             </a>
           </Link>
         </div>
       </div>
 
+      {/* Leaderboard Preview */}
+      <div style={{ padding: '2rem', backgroundColor: '#fff', marginTop: '2rem' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>Top Agencies Today</h2>
+        <div style={{
+          display: 'flex',
+          overflowX: 'auto',
+          gap: '1rem',
+          padding: '1rem 0',
+          justifyContent: 'center'
+        }}>
+          {['Disruptive Advertising', 'SmartSites', 'Lyfe Marketing', 'Tulos Helsinki'].map((name, idx) => (
+            <div key={idx} style={{
+              minWidth: '220px',
+              backgroundColor: '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+              padding: '1rem',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.06)',
+              textAlign: 'center'
+            }}>
+              <strong>{name}</strong>
+              <div style={{ marginTop: '0.5rem' }}>Sharpen Score: {95 - idx}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* How It Works */}
+      <div style={{ backgroundColor: '#f5f5f5', padding: '3rem 2rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '1.75rem', marginBottom: '2rem' }}>How It Works</h2>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+          <div style={{ maxWidth: '300px' }}>
+            <h3>📊 Agencies Report KPIs</h3>
+            <p>Marketing firms submit real performance data such as ROAS, CPA, CTR, or Conversion Rates.</p>
+          </div>
+          <div style={{ maxWidth: '300px' }}>
+            <h3>⚙️ Sharpen Ranks Them</h3>
+            <p>We normalize and score agencies using our proprietary formula based on performance and consistency.</p>
+          </div>
+          <div style={{ maxWidth: '300px' }}>
+            <h3>🏆 You Choose With Confidence</h3>
+            <p>Companies can now choose partners based on data — not fluff or pitch decks.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Why It Matters */}
+      <div style={{ padding: '3rem 2rem', backgroundColor: '#fff', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '1.75rem', marginBottom: '2rem' }}>Why Sharpen?</h2>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '2rem'
+        }}>
+          <div style={{ maxWidth: '300px' }}>
+            <h3>📈 Transparency</h3>
+            <p>We make agency results public. Finally, measurable accountability in marketing.</p>
+          </div>
+          <div style={{ maxWidth: '300px' }}>
+            <h3>⏱️ Updated Daily</h3>
+            <p>Sharpen reflects daily changes in performance — like a real market index.</p>
+          </div>
+          <div style={{ maxWidth: '300px' }}>
+            <h3>🔍 Better Decisions</h3>
+            <p>Stop relying on guesswork. Find agencies based on what they actually deliver.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer style={{
+        textAlign: 'center',
+        padding: '2rem',
+        backgroundColor: '#f0f0f0',
+        marginTop: '2rem'
+      }}>
+        <p>&copy; {new Date().getFullYear()} Sharpen. All rights reserved.</p>
+        <div style={{ marginTop: '0.5rem', fontSize: '0.9rem' }}>
+          <Link href="/agencies"><a style={{ margin: '0 0.5rem' }}>Agencies</a></Link>
+          <Link href="/submit"><a style={{ margin: '0 0.5rem' }}>Submit</a></Link>
+        </div>
+      </footer>
     </div>
   );
 }
